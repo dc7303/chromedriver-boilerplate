@@ -66,6 +66,5 @@ def close_chrome(chrome: webdriver):
     """
     def close():
         chrome.close()
-        logger.info('Close chrome.')
-        logger.info('Close proccess.')
+        logger.info('Close Chrome.')
     return close
