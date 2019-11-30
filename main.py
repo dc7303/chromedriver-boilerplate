@@ -20,8 +20,11 @@ if platform == 'darwin':
 elif platform == 'linux':
     logger.debug('System platform : Linux')
     driver_path += 'chromedriverLinux'
+elif platform == 'win32':
+    logger.debug('System platform : Window')
+    driver_path += 'chromedriverWindow.exe'
 else:
-    logger.error(f'[{sys.platform}] not supported. This library support only Linux, Darwin.')
+    logger.error(f'[{sys.platform}] not supported. This library support only Linux, Darwin, win32. Check your system platform')
     raise Exception()
 
 # 크롬 드라이버 인스턴스 생성    
