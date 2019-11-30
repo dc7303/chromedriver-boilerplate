@@ -1,8 +1,8 @@
-
 from selenium import webdriver
 from logger import setup_custom_logger
 
 logger = setup_custom_logger('driverbuilder')
+
 
 def _enable_download_in_headless_chrome(driver: webdriver, download_dir: str):
         """

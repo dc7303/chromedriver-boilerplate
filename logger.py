@@ -1,5 +1,6 @@
 import logging
 
+
 def setup_custom_logger(name: str):
     """
     커스텀 로그 생성

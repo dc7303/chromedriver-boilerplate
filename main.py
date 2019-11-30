@@ -3,7 +3,8 @@ import os
 import atexit
 
 from logger import setup_custom_logger
-from chromedirver import generate_chrome, close_chrome
+from chromedriver import generate_chrome, close_chrome
+
 
 if __name__ == '__main__':
     logger = setup_custom_logger('main.py')
