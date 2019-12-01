@@ -3,7 +3,7 @@ import os
 import atexit
 
 from logger import setup_custom_logger
-from chromedriver import generate_chrome, close_chrome
+from chromedriver import generate_chrome
 
 
 if __name__ == '__main__':
@@ -32,4 +32,3 @@ chrome = generate_chrome(
     driver_path=driver_path,
     headless=True,
     download_path=DOWNLOAD_DIR)
-atexit.register(close_chrome(chrome))       # 스크립트 종료전 무조건 크롬 종료

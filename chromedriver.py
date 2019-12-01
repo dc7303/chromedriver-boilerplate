@@ -1,3 +1,4 @@
+import atexit
 from selenium import webdriver
 from logger import setup_custom_logger
 
@@ -20,6 +21,18 @@ def _enable_download_in_headless_chrome(driver: webdriver, download_dir: str):
         driver.execute("send_command", params)
 
 
+def _close_chrome(chrome: webdriver):
+    """
+    크롬 종료
+
+    :param chrome: 크롬 드라이버 인스턴스
+    """
+    def close():
+        chrome.close()
+        logger.info('Close Chrome.')
+    return close
+
+
 def generate_chrome(
     driver_path: str,
     download_path: str,
@@ -39,16 +52,16 @@ def generate_chrome(
     if headless:
         options.add_argument('headless')
         options.add_argument('--disable-gpu')
-    options.add_argument('--start-maximized')
-    options.add_argument('--no-sandbox')
-    options.add_argument('lang=ko_KR')
-    options.add_argument('window-size=1920,1480')
+    # options.add_argument('--start-maximized')
+    # options.add_argument('--no-sandbox')
+    # options.add_argument('lang=ko_KR')
+    # options.add_argument('window-size=1920,1480')
     options.add_experimental_option('prefs', {
         'download.default_directory': download_path,
         'download.prompt_for_download': False,
-        'download.directory_upgrade': True,
-        'safebrowsing.enabled': False,
-        'safebrowsing.disable_download_protection': True
+        # 'download.directory_upgrade': True,
+        # 'safebrowsing.enabled': False,
+        # 'safebrowsing.disable_download_protection': True
     })
     
     chrome = webdriver.Chrome(executable_path=driver_path, options=options)
@@ -56,15 +69,6 @@ def generate_chrome(
     if headless:
         _enable_download_in_headless_chrome(chrome, download_path)
 
+    atexit.register(_close_chrome(chrome))       # 스크립트 종료전 무조건 크롬 종료
+
     return chrome
-
-def close_chrome(chrome: webdriver):
-    """
-    크롬 종료
-
-    :param chrome: 크롬 드라이버 인스턴스
-    """
-    def close():
-        chrome.close()
-        logger.info('Close Chrome.')
-    return close
