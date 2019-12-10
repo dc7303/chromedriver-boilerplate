@@ -1,6 +1,5 @@
 import sys
 import os
-import atexit
 
 from logger import setup_custom_logger
 from chromedriver import generate_chrome

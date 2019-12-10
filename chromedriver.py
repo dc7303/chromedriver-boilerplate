@@ -17,7 +17,13 @@ def _enable_download_in_headless_chrome(driver: webdriver, download_dir: str):
         """
         driver.command_executor._commands["send_command"] = ("POST", '/session/$sessionId/chromium/send_command')
 
-        params = {'cmd': 'Page.setDownloadBehavior', 'params': {'behavior': 'allow', 'downloadPath': download_dir}}
+        params = {
+            'cmd': 'Page.setDownloadBehavior',
+            'params': {
+                'behavior': 'allow',
+                'downloadPath': download_dir
+            }
+        }
         driver.execute("send_command", params)
 
 
